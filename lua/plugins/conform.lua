@@ -15,7 +15,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      java = { 'clang_format' },
+      -- java = { 'clang_format' },
       -- Conform can also run multiple formatters sequentially
       -- python = { "isort", "black" },
       --
@@ -27,7 +27,7 @@ return { -- Autoformat
       clang_format = {
         cmd = 'clang-format',
         append_args = function()
-          return { '--style={BasedOnStyle: Google, IndentWidth: 4}' }
+          return { '--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}' }
         end,
       },
     },

@@ -20,33 +20,34 @@ keymap.set('n', '<leader>sk', '<C-w>+') -- make split windows height taller
 keymap.set('n', '<leader>sl', '<C-w>>5') -- make split windows width bigger
 keymap.set('n', '<leader>sh', '<C-w><5') -- make split windows width smaller
 
--- Tab management
-keymap.set('n', '<leader>to', ':tabnew<CR>') -- open a new tab
-keymap.set('n', '<leader>tx', ':tabclose<CR>') -- close a tab
-keymap.set('n', '<leader>tn', ':tabn<CR>') -- next tab
-keymap.set('n', '<leader>tp', ':tabp<CR>') -- previous tab
-
 -- Nvim-tree
-keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = '[t]oggle [t]ree' }) -- toggle file explorer
-keymap.set('n', '<leader>gf', ':NvimTreeFindFile<CR>', { desc = '[g]oto [f]ile' }) -- find file in file explorer
+keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { desc = '[T]oggle [T]ree' }) -- toggle file explorer
+keymap.set('n', '<leader>gf', ':NvimTreeFindFile<CR>', { desc = '[G]oto [F]ile' }) -- find file in file explorer
 
 -- BarBar
-keymap.set('n', '<C-Tab>', '<Cmd>BufferNext<CR>', {})
-keymap.set('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>', {})
+keymap.set({ 'n', 'i' }, '<C-Tab>', '<Cmd>BufferNext<CR>', {})
+keymap.set({ 'n', 'i' }, '<C-S-Tab>', '<Cmd>BufferPrevious<CR>', {})
 
-keymap.set('n', '<leader>bc', '<Cmd>BufferClose<CR>', { desc = '[B]uffer [C]lose' })
-keymap.set('n', '<leader>bn', '<Cmd>enew<CR>', { desc = '[B]uffer [N]ew' })
+keymap.set({ 'n', 'i' }, '<C-x>', '<Cmd>BufferClose<CR>', { desc = '[B]uffer [C]lose' })
+keymap.set({ 'n', 'i' }, '<C-S-x>', '<Cmd>BufferClose!<CR>', { desc = '[B]uffer force [C]lose' })
+keymap.set({ 'n', 'i' }, '<leader>bn', '<Cmd>enew<CR>', { desc = '[B]uffer [N]ew' })
 
-keymap.set('n', '<leader>bg1', '<Cmd>BufferGoto 1<CR>', { desc = '[B]uffer [G]oto [1]' })
-keymap.set('n', '<leader>bg2', '<Cmd>BufferGoto 2<CR>', { desc = '[B]uffer [G]oto [2]' })
-keymap.set('n', '<leader>bg3', '<Cmd>BufferGoto 3<CR>', { desc = '[B]uffer [G]oto [3]' })
-keymap.set('n', '<leader>bg4', '<Cmd>BufferGoto 4<CR>', { desc = '[B]uffer [G]oto [4]' })
-keymap.set('n', '<leader>bg5', '<Cmd>BufferGoto 5<CR>', { desc = '[B]uffer [G]oto [5]' })
-keymap.set('n', '<leader>bg6', '<Cmd>BufferGoto 6<CR>', { desc = '[B]uffer [G]oto [6]' })
-keymap.set('n', '<leader>bg7', '<Cmd>BufferGoto 7<CR>', { desc = '[B]uffer [G]oto [7]' })
-keymap.set('n', '<leader>bg8', '<Cmd>BufferGoto 8<CR>', { desc = '[B]uffer [G]oto [8]' })
-keymap.set('n', '<leader>bg9', '<Cmd>BufferGoto 9<CR>', { desc = '[B]uffer [G]oto [9]' })
-keymap.set('n', '<leader>bg0', '<Cmd>BufferGoto 10<CR>', { desc = '[B]uffer [G]oto 1[0]' })
+keymap.set({ 'n', 'i' }, '<A-1>', '<Cmd>BufferGoto 1<CR>', { desc = '[B]uffer [G]oto [1]' })
+keymap.set({ 'n', 'i' }, '<A-2>', '<Cmd>BufferGoto 2<CR>', { desc = '[B]uffer [G]oto [2]' })
+keymap.set({ 'n', 'i' }, '<A-3>', '<Cmd>BufferGoto 3<CR>', { desc = '[B]uffer [G]oto [3]' })
+keymap.set({ 'n', 'i' }, '<A-4>', '<Cmd>BufferGoto 4<CR>', { desc = '[B]uffer [G]oto [4]' })
+keymap.set({ 'n', 'i' }, '<A-5>', '<Cmd>BufferGoto 5<CR>', { desc = '[B]uffer [G]oto [5]' })
+keymap.set({ 'n', 'i' }, '<A-6>', '<Cmd>BufferGoto 6<CR>', { desc = '[B]uffer [G]oto [6]' })
+keymap.set({ 'n', 'i' }, '<A-7>', '<Cmd>BufferGoto 7<CR>', { desc = '[B]uffer [G]oto [7]' })
+keymap.set({ 'n', 'i' }, '<A-8>', '<Cmd>BufferGoto 8<CR>', { desc = '[B]uffer [G]oto [8]' })
+keymap.set({ 'n', 'i' }, '<A-9>', '<Cmd>BufferGoto 9<CR>', { desc = '[B]uffer [G]oto [9]' })
+keymap.set({ 'n', 'i' }, '<A-0>', '<Cmd>BufferGoto 10<CR>', { desc = '[B]uffer [G]oto 1[0]' })
+
+-- LazyGit
+keymap.set('n', '<leader>lg', '<cmd>LazyGit<cr>', { desc = '[L]azy[G]it' })
+
+-- Octo
+keymap.set('n', '<leader>o', '<cmd>Octo actions<cr>', { desc = '[O]cto' })
 
 -- Telescope
 local telescope = require 'telescope.builtin'
@@ -60,37 +61,38 @@ keymap.set('n', '<leader>/', telescope.current_buffer_fuzzy_find, { desc = 'Fuzz
 local conform = require 'conform'
 keymap.set('n', '<leader>f', function()
   conform.format { async = true, lsp_format = 'fallback' }
-end, { desc = '[f]ormat' })
+end, { desc = '[F]ormat' })
 keymap.set('v', '<leader>f', function()
   conform.format({ async = true, lsp_format = 'fallback' }, function(err)
     if not err then
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
     end
   end)
-end, { desc = '[f]ormat' })
+end, { desc = '[F]ormat' })
 
 -- LSP
 keymap.set('n', '<leader>gg', vim.lsp.buf.hover, { desc = '' })
-keymap.set('n', '<leader>gd', vim.lsp.buf.definition, { desc = '[g]oto [d]efinition' })
-keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = '[g]oto [D]ecleration' })
-keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, { desc = '[g]oto [i]mplementation' })
-keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, { desc = '[g]oto [t]ype Definition' })
-keymap.set('n', '<leader>gr', vim.lsp.buf.references, { desc = '[g]oto [r]eferences' })
+keymap.set('n', '<leader>gd', telescope.lsp_definitions, { desc = '[G]oto [D]efinition' })
+keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, { desc = '[G]oto [D]ecleration' })
+keymap.set('n', '<leader>gi', telescope.lsp_implementations, { desc = '[G]oto [I]mplementation' })
+keymap.set('n', '<leader>gt', telescope.lsp_type_definitions, { desc = '[G]oto [T]ype Definition' })
+keymap.set('n', '<leader>gr', telescope.lsp_references, { desc = '[G]oto [R]eferences' })
 keymap.set('n', '<leader>gs', vim.lsp.buf.signature_help, { desc = '' })
-keymap.set('n', '<leader>rr', vim.lsp.buf.rename, { desc = '[r]ename' })
+keymap.set('n', '<leader>rr', vim.lsp.buf.rename, { desc = '[R]ename' })
 keymap.set('n', '<A-CR>', vim.lsp.buf.code_action)
 keymap.set('n', '<leader>gl', vim.diagnostic.open_float, { desc = '' })
 keymap.set('n', '<leader>gp', vim.diagnostic.goto_prev, { desc = '' })
 keymap.set('n', '<leader>gn', vim.diagnostic.goto_next, { desc = '' })
-keymap.set('n', '<leader>tr', vim.lsp.buf.document_symbol, { desc = '' })
+keymap.set('n', '<leader>tr', telescope.lsp_document_symbols, { desc = '' })
 keymap.set('i', '<C-Space>', vim.lsp.buf.completion)
+keymap.set('n', '<leader>q', telescope.diagnostics, { desc = 'Open Diagnostics' })
 
 -- Filetype-specific keymaps (these can be done in the ftplugin directory instead if you prefer)
 keymap.set('n', '<leader>go', function()
   if vim.bo.filetype == 'java' then
     require('jdtls').organize_imports()
   end
-end)
+end, { desc = '[O]rganize Imports' })
 
 keymap.set('n', '<leader>gu', function()
   if vim.bo.filetype == 'java' then
