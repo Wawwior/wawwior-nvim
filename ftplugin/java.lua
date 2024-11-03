@@ -24,7 +24,7 @@ local config = {
   -- The command that starts the language server
   -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
   cmd = {
-    'java',
+    vim.fn.expand '~/.sdkman/candidates/java/current/bin/java',
     '-Declipse.application=org.eclipse.jdt.ls.core.id1',
     '-Dosgi.bundles.defaultStartLevel=4',
     '-Declipse.product=org.eclipse.jdt.ls.core.product',
@@ -54,8 +54,9 @@ local config = {
   -- Here you can configure eclipse.jdt.ls specific settings
   -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
   settings = {
+    jdt_uri_timeout_ms = 10000,
     java = {
-      home = vim.fn.expand '~/.sdkman/candidates/java/17.0.12-tem/',
+      home = vim.fn.expand '~/.sdkman/candidates/java/21.0.3-tem/',
       eclipse = {
         downloadSources = true,
       },
