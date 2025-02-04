@@ -25,7 +25,7 @@ return { -- Autoformat
     },
     formatters = {
       astyle = {
-        append_args = { '--style=java', '-S' },
+        append_args = { '--style=java', '-SfxgHU', '--indent-lambda' },
       },
       checkstyle = {
         command = 'checkstyle',
